@@ -1,5 +1,10 @@
 {
   "expo": {
+    "scheme": "acme",
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
     "name": "opencv-mobileapp",
     "slug": "opencv-mobileapp",
     "version": "1.0.0",
@@ -21,18 +26,13 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.thebinij.opencvmobileapp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ae831ac8-c930-417f-9333-c2575e27c93e"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
-        }
-      ]
-    ]
+    }
   }
 }
