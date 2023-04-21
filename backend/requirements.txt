@@ -1,0 +1,6 @@
+Flask==2.2.3
+opencv-python-headless==4.7.0.72
+Flask-SocketIO==5.3.3
+Flask-Cors==3.0.10
+simple-websocket==0.10.0
+gunicorn==20.1.0

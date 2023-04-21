@@ -11,10 +11,9 @@ export default function Button({ onPress, children }) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#5793EC",
-    padding: 10,
+    padding: 14,
     borderRadius: 5,
     alignItems: "center",
-    marginTop: 10,
   },
   text: {
     textAlign: "center",
