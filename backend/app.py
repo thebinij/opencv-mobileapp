@@ -1,4 +1,4 @@
-from flask import Flask, Response, request, jsonify
+from flask import Flask, Response, request, jsonify,render_template
 from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO
 import cv2
@@ -11,10 +11,24 @@ socketio = SocketIO(app, cors_allowed_origins="*", websocket_transport_options={
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
-@app.route('/test', methods=['GET'])
-def test_endpoint():
-    return jsonify({'message': 'This endpoint is working'})
+# Add MIME types for APK and PNG files
+@app.route('/static/<path:path>')
+def send_static(path):
+    if path.endswith('.apk'):
+        mimetype = 'application/vnd.android.package-archive'
+    elif path.endswith('.jpg'):
+        mimetype = 'image/jpeg'
+    else:
+        mimetype = None
+    if mimetype is not None:
+        return app.send_static_file(path), {'Content-Type': mimetype}
+    else:
+        return 'Unsupported file type', 404
+
 
 @app.route('/api/process-image', methods=['POST'])
 @cross_origin()

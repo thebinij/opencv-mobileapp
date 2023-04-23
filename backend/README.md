@@ -6,5 +6,5 @@ docker run  -d -p 5000:5000  <imagename>:<tag>
 
 ### Build and Deploy to Docker Hub
 ```shell
-docker buildx build --platform linux/amd64 -t <imagename>:<tag> --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t <imagename>:<tag> --push .
 ```

@@ -18,7 +18,7 @@ import { Welcome } from "../components";
 import * as ImagePicker from "expo-image-picker";
 
 const backendURL =
-  "https://opencv-app1-1-6mds7d22ya-uc.a.run.app";
+  "https://opencv.hackhive.xyz";
 const modelType = ["HAAR", "DNN"];
 
 const Home = () => {
