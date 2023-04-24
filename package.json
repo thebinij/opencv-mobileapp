@@ -3,12 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "npx react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest",
-    "generate": "npx react-native generate-bootsplash ./src/assets/original_icon.png --background-color=2EE59D   --logo-width=100 --assets-path=./src/assets --flavor=main"
+    "test": "jest"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",
@@ -18,7 +17,6 @@
     "axios": "^1.3.6",
     "react": "18.2.0",
     "react-native": "0.71.7",
-    "react-native-bootsplash": "^4.6.0",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-image-picker": "^5.3.1",
     "react-native-paper": "^5.7.0",
