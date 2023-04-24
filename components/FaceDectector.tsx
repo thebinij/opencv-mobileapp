@@ -1,19 +1,32 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, Text, View, ScrollView, Platform } from "react-native";
+import React, { useEffect, useState } from "react";
 import { FileMeta } from "../utils/types";
 import * as ImagePicker from "expo-image-picker";
 import { BACKEND_URL, SIZES } from "../utils/constants";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { Button,ProgressBar } from "react-native-paper";
+import { Button, ProgressBar } from "react-native-paper";
 import ImageViewer from "./ImageViewer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const FaceDectector = () => {
+  const [hasGalleryPermission, setHasGalleryPermission] =
+    useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [resultImage, setResultImage] = useState(null);
   const [selectedFile, setSelectedFile] = useState<FileMeta | any>(null);
   const [loading, setLoading] = useState(false);
   const [modelValue, setModelValue] = useState("HAAR");
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        setHasGalleryPermission(status === "granted");
+      }
+    })();
+  }, []);
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -30,6 +43,10 @@ const FaceDectector = () => {
     setSelectedImage(localUri);
   };
 
+  if (hasGalleryPermission === false) {
+    return <Text>No access to Internal Storage</Text>;
+  }
+
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("@modelType");
@@ -39,7 +56,7 @@ const FaceDectector = () => {
       }
     } catch (e) {
       // error reading value
-      console.log("error reading data",e)
+      console.log("error reading data", e);
     }
   };
 
