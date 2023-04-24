@@ -1,44 +1,4 @@
 {
-  "expo": {
-    "name": "opencv-app",
-    "slug": "opencv-app",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app accesses your images."
-        }
-      ]
-    ],
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.hackhive.opencv"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "3d998148-b49b-4381-83a4-50611241ad6e"
-      }
-    }
-  }
+  "name": "opencvapp",
+  "displayName": "opencvapp"
 }
