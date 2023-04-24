@@ -1,13 +1,17 @@
-import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
+import {Provider as PaperProvider} from 'react-native-paper';
 import AppNavigator from './src/navigation/Navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
+import SplashScreen from 'react-native-splash-screen'
+
 
 export default function App() {
-  const theme = {
-    ...DefaultTheme,
-  };
+
+  useEffect(()=>{
+    SplashScreen.hide();
+  },[])
+
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider >
       <AppNavigator />
     </PaperProvider>
   );
