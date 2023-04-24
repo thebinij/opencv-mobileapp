@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {RadioButton} from 'react-native-paper';
 import {Appbar} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,30 +7,30 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const SettingScreen = () => {
   const [value, setValue] = useState('HAAR');
 
-  const storeData = async (value: string) => {
+  const storeData = async (newvalue: string) => {
     try {
-      await AsyncStorage.setItem('@modelType', value);
+      await AsyncStorage.setItem('@modelType', newvalue);
     } catch (e) {
       // saving error
       console.log('error storing data', e);
     }
   };
 
-  useEffect(() => {
-    // Update localStorage when `value` changes
-    storeData(value);
-  }, [value]);
+  function changeValue(newvalue: string) {
+    setValue(newvalue);
+    storeData(newvalue);
+  }
 
   return (
     <View style={styles.container}>
       <Appbar.Header>
-        <Appbar.Content title="Settings"></Appbar.Content>
+        <Appbar.Content title="Settings" />
       </Appbar.Header>
       <View style={styles.wrapper}>
-        <Text style={{fontWeight: 'bold', paddingBottom: 4}}>Model Type</Text>
+        <Text style={styles.text}>Model Type</Text>
 
         <RadioButton.Group
-          onValueChange={newValue => setValue(newValue)}
+          onValueChange={newValue => changeValue(newValue)}
           value={value}>
           <View style={styles.radioButtonContainer}>
             <Text>DNN</Text>
@@ -49,10 +49,16 @@ export default SettingScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#1212',
+  },
+  text: {
+    fontWeight: 'bold',
+    paddingBottom: 4,
   },
   wrapper: {
     paddingVertical: 10,
     alignItems: 'center',
+    color: '#000',
   },
   radioButtonContainer: {
     flexDirection: 'row',
