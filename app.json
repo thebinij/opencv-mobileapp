@@ -1,12 +1,7 @@
 {
   "expo": {
-    "scheme": "acme",
-    "web": {
-      "favicon": "./assets/favicon.png",
-      "bundler": "metro"
-    },
-    "name": "opencv-mobileapp",
-    "slug": "opencv-mobileapp",
+    "name": "opencv-app",
+    "slug": "opencv-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,11 +22,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.thebinij.opencvmobileapp"
+      "package": "com.hackhive.opencv"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "ae831ac8-c930-417f-9333-c2575e27c93e"
+        "projectId": "3d998148-b49b-4381-83a4-50611241ad6e"
       }
     }
   }

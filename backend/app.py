@@ -1,4 +1,4 @@
-from flask import Flask, Response, request, jsonify,render_template
+from flask import Flask, Response, request,render_template
 from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO
 import cv2
