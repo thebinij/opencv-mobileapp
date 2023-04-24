@@ -49,7 +49,7 @@ export default SettingScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1212',
+    backgroundColor: '#D3D3D3',
   },
   text: {
     fontWeight: 'bold',
