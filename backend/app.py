@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 import os
 import base64
+import pytesseract  # Import pytesseract for OCR
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", websocket_transport_options={'websocket': 'simple'})  
@@ -30,32 +31,17 @@ def send_static(path):
         return 'Unsupported file type', 404
 
 
-@app.route('/api/process-image', methods=['POST'])
+@app.route('/api/ocr', methods=['POST'])
 @cross_origin()
-def process_image():
-   
-    # Receive the uploaded image
+def ocr():
+     # Receive the uploaded image
     file = request.files['image']
     image = cv2.imdecode(np.frombuffer(file.read(), np.uint8), cv2.IMREAD_COLOR)
-   
-    # Get the selected model from the 'model' parameter in the request arguments
-    selected_model = request.args.get('model')
 
-    if selected_model == 'dnn':
-        # Process image using DNN model
-        image2 = detect_DNN(image)
-    else:
-        # Handle invalid model selection
-        image2 = detect_HAAR_C(image)
+    # Perform OCR using Tesseract
+    text = pytesseract.image_to_string(image)
 
-    # Encode the processed image as a base64 string
-    _, buffer = cv2.imencode('.jpg', image2)
-    encoded_image = base64.b64encode(buffer).decode('utf-8')
-
-    return Response(f"data:image/jpeg;base64,{encoded_image}", content_type='text/plain')
-
-if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    return Response(text, content_type='text/plain')
 
 def detect_DNN(image):
     """
@@ -144,3 +130,32 @@ def detect_HAAR_C(image):
             
 
     return image
+
+
+@app.route('/api/process-image', methods=['POST'])
+@cross_origin()
+def process_image():
+   
+    # Receive the uploaded image
+    file = request.files['image']
+    image = cv2.imdecode(np.frombuffer(file.read(), np.uint8), cv2.IMREAD_COLOR)
+   
+    # Get the selected model from the 'model' parameter in the request arguments
+    selected_model = request.args.get('model')
+
+    if selected_model == 'dnn':
+        # Process image using DNN model
+        image2 = detect_DNN(image)
+    else:
+        # Handle invalid model selection
+        image2 = detect_HAAR_C(image)
+
+    # Encode the processed image as a base64 string
+    _, buffer = cv2.imencode('.jpg', image2)
+    encoded_image = base64.b64encode(buffer).decode('utf-8')
+
+    return Response(f"data:image/jpeg;base64,{encoded_image}", content_type='text/plain')
+
+if __name__ == '__main__':
+    socketio.run(app, debug=True)
+
